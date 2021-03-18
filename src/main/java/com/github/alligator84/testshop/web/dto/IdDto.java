@@ -1,6 +1,6 @@
-package com.github.alligator84.testshop.web;
+package com.github.alligator84.testshop.web.dto;
 
-public class CustomerDto {
+public class IdDto {
 
     private int id;
 
