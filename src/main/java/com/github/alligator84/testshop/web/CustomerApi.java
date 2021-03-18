@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(path = "/api/customers")
@@ -17,7 +18,14 @@ public class CustomerApi {
     private CustomerService customerService;
 
     @GetMapping
-    public List<Customer> findAll() {
-        return customerService.findAll();
+    public List<CustomerDto> findAll() {
+        return customerService.findAll().stream()
+                .map(customer -> {
+                    CustomerDto dto = new CustomerDto();
+                    dto.setId(customer.getId());
+
+                    return dto;
+                })
+                .collect(Collectors.toList());
     }
 }
